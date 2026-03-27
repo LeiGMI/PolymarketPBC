@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🤖 Sentinel — Autonomous News-Driven Polymarket Trading Agent
 
 > **An AI-powered autonomous agent that monitors breaking news, estimates predictive edge on Polymarket prediction markets, and executes trades in real-time using Bayesian confidence scoring and Kelly criterion position sizing.**
@@ -411,3 +412,6 @@ MIT License — see [LICENSE](LICENSE) for details.
 ## Team
 
 Built at Penn Blockchain Conference 2026 Hackathon.
+=======
+# PolymarketPBC
+>>>>>>> 9fb1a9487a66bbd84da9fa577e17a09e7a6c0691
