@@ -410,9 +410,9 @@ MIT License — see [LICENSE](LICENSE) for details.
 ---
 
 ## Team
-Leo Song
-Victor Song
-Aadit Jerfy
+Leo Song,
+Victor Song,
+Aadit Jerfy,
 Tharun Ekambaran
 
 Built at Penn Blockchain Conference 2026 Hackathon.
