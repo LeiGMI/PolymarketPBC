@@ -412,7 +412,7 @@ This repo is a hackathon prototype and demo artifact. The core decision engine, 
 ### ⚠️ Limitations
 - **No live execution yet** — The agent runs in paper trading mode only; `py-clob-client` SDK integration is architected but not wired
 - **No historical evaluation** — Backtest uses simulated news events against real market structure, not a large real-world news dataset
-- **Minimal CI** — Basic import checks and backtest run via GitHub Actions; no unit test coverage yet
+- **CI scaffolded but not yet active** — GitHub Actions workflow is committed (.github/workflows/ci.yml) but Actions is not yet enabled on this account; no unit test coverage yet
 - **Latency claims are architectural** — Ingestion latency targets are design goals based on prototype measurements, not benchmarked on production infrastructure
 - **LLM analysis is probabilistic** — The "superforecaster" framing describes structured constrained-output prompting, not a calibrated forecasting system
 
