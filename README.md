@@ -1,7 +1,6 @@
-<<<<<<< HEAD
 # 🤖 Sentinel — Autonomous News-Driven Polymarket Trading Agent
 
-> **An AI-powered autonomous agent that monitors breaking news, estimates predictive edge on Polymarket prediction markets, and executes trades in real-time using Bayesian confidence scoring and Kelly criterion position sizing.**
+> **An AI-powered autonomous agent that monitors breaking news, estimates predictive edge on Polymarket prediction markets, and executes trades using Bayesian confidence scoring and Kelly criterion position sizing.**
 
 Built for the [Penn Blockchain Conference 2026 Hackathon](https://www.pennblockchain.com/) — Polymarket Bounty.
 
@@ -18,6 +17,7 @@ Built for the [Penn Blockchain Conference 2026 Hackathon](https://www.pennblockc
 - [Running the Backtest](#running-the-backtest)
 - [Configuration](#configuration)
 - [Project Structure](#project-structure)
+- [Current Status & Roadmap](#current-status--roadmap)
 
 ---
 
@@ -33,7 +33,7 @@ Built for the [Penn Blockchain Conference 2026 Hackathon](https://www.pennblockc
 │ • RSS feeds  │     │ • LLM-based  │     │ • Bayesian   │     │ • Orderbook  │
 │ • Multi-src  │     │ • Structured │     │ • Kelly      │     │ • Slippage   │
 │ • Dedup      │     │   prompting  │     │   criterion  │     │   modeling   │
-│ • Latency    │     │ • Causal     │     │ • Time decay │     │ • Paper/Live │
+│ • Latency    │     │ • Causal     │     │ • Time decay │     │ • Paper mode │
 │   tracking   │     │   reasoning  │     │ • Multi-src  │     │ • Risk mgmt  │
 └──────────────┘     └──────────────┘     └──────────────┘     └──────────────┘
 ```
@@ -48,7 +48,7 @@ Built for the [Penn Blockchain Conference 2026 Hackathon](https://www.pennblockc
 ## Architecture
 
 ```
-sentinel/
+PolymarketPBC/
 ├── src/
 │   ├── ingestion/
 │   │   ├── news.py          # Multi-source RSS ingestion with dedup & latency tracking
@@ -58,7 +58,7 @@ sentinel/
 │   ├── scoring/
 │   │   └── confidence.py    # Bayesian scoring + Kelly criterion sizing
 │   ├── execution/
-│   │   └── executor.py      # Paper trading simulator + live execution
+│   │   └── executor.py      # Paper trading simulator with orderbook-based fills
 │   ├── agent.py             # Main autonomous loop
 │   ├── backtest.py          # Backtesting simulation
 │   └── config.py            # Configuration management
@@ -229,7 +229,7 @@ EXECUTE TRADE
 
 ### Paper Trading Mode (Default)
 
-Paper trading simulates realistic fills by walking the orderbook:
+The agent currently operates in paper trading mode, simulating realistic fills by walking the orderbook:
 
 ```python
 def simulate_fill(signal, orderbook):
@@ -246,23 +246,18 @@ def simulate_fill(signal, orderbook):
 
 This captures the key slippage dynamics that a naive simulation would miss.
 
-### Live Trading Mode
+### Live Trading (Roadmap)
 
-Live trading uses the official `py-clob-client` Python SDK:
+The execution engine is architected with a clear interface for live trading via the official `py-clob-client` SDK. The paper trading module validates the full signal → order flow, and the live execution path would plug in directly using:
 
 ```python
 from py_clob_client.client import ClobClient
 
 client = ClobClient(HOST, key=PRIVATE_KEY, chain_id=137)
 client.set_api_creds(client.create_or_derive_api_creds())
-
-order = client.create_and_post_order({
-    "token_id": signal.token_id,
-    "price": signal.limit_price,
-    "size": signal.shares,
-    "side": signal.side,
-})
 ```
+
+This is not yet wired for live execution — the focus of this hackathon build was on the **data ingestion strategy, confidence scoring logic, and overall architecture**, which are the primary judging criteria.
 
 ### Risk Management
 
@@ -287,8 +282,8 @@ order = client.create_and_post_order({
 ### Installation
 
 ```bash
-git clone https://github.com/YOUR_TEAM/sentinel-polymarket-agent.git
-cd sentinel-polymarket-agent
+git clone https://github.com/LeiGMI/PolymarketPBC.git
+cd PolymarketPBC
 pip install -r requirements.txt
 ```
 
@@ -296,12 +291,10 @@ pip install -r requirements.txt
 
 ```bash
 # For live AI analysis (optional — mock analysis works without keys)
-export ANTHROPIC_API_KEY="sk-..."
+export ANTHROPIC_API_KEY="sk-ant-..."
 
-# For live trading (optional — paper trading is default)
-export POLYMARKET_PRIVATE_KEY="0x..."
-export POLYMARKET_FUNDER_ADDRESS="0x..."
-export EXECUTION_MODE="paper"  # or "live"
+# For paper trading with real market data (no keys needed for backtest)
+export EXECUTION_MODE="paper"
 ```
 
 ### Run the Agent
@@ -325,7 +318,7 @@ python -m src.backtest
 ```
 
 This will:
-1. Fetch real active markets from Polymarket's Gamma API
+1. Attempt to fetch real active markets from Polymarket's Gamma API (falls back to synthetic markets if offline)
 2. Simulate 8 realistic news events across politics, economics, crypto, and tech
 3. Run the full scoring pipeline for each event
 4. Generate paper trades with orderbook-simulated fills
@@ -336,23 +329,23 @@ This will:
 
 ```
 ═══ BACKTEST SIMULATION START ═══
-Fetching real markets from Polymarket...
-Using 30 markets for backtest
+Using 10 markets for backtest
 
-─── Cycle 1: Federal Reserve signals potential rate pause at upcoming... ───
-  TRADE: BUY Yes on 'fed-rate-decision' | $250.00 @ 0.4520 | edge=+0.072 | EV=$18.50
-  Portfolio: $10,018.50 (PnL: +$18.50 / +0.2%)
+─── Cycle 1: Federal Reserve signals potential rate pause... ───
+  TRADE: BUY Yes on 'fed-rate-cut-next-meeting' | $127.69 @ 0.4581 | edge=+0.056 | EV=$13.34
+  TRADE: BUY Yes on 'ecb-rate-cut-surprise' | $86.85 @ 0.3573 | edge=+0.046 | EV=$9.48
+  Portfolio: $10,001.62 (PnL: +$1.62 / +0.0%)
 
-─── Cycle 2: Major tech company announces breakthrough in AI model... ───
-  TRADE: BUY Yes on 'gpt5-release' | $180.00 @ 0.3800 | edge=+0.058 | EV=$12.30
-  Portfolio: $10,030.80 (PnL: +$30.80 / +0.3%)
-
-...
+─── Cycle 3: Senate advances cryptocurrency regulation bill... ───
+  TRADE: BUY Yes on 'btc-150k-july' | $79.38 @ 0.3289 | edge=+0.046 | EV=$9.82
+  TRADE: BUY Yes on 'us-crypto-regulation' | $223.29 @ 0.5575 | edge=+0.073 | EV=$26.19
+  REJECTED: crypto-exchange-hack (slippage 58.6% exceeded 3% tolerance)
+  Portfolio: $10,008.80 (PnL: +$8.80 / +0.1%)
 
 ═══ BACKTEST COMPLETE ═══
-Final Portfolio: $10,185.40
-Total PnL: +$185.40 (+1.9%)
-Total Trades: 6
+Final Portfolio: $10,010.19
+Total PnL: +$10.19 (+0.1%)
+Total Trades: 8 executed, 5 rejected by risk management
 ```
 
 ---
@@ -378,7 +371,7 @@ class ScoringConfig:
 ## Project Structure
 
 ```
-sentinel/
+PolymarketPBC/
 ├── src/
 │   ├── config.py                 # All configurable parameters
 │   ├── agent.py                  # Main autonomous agent loop
@@ -391,7 +384,7 @@ sentinel/
 │   ├── scoring/
 │   │   └── confidence.py         # Bayesian scoring + Kelly sizing
 │   └── execution/
-│       └── executor.py           # Paper & live trade execution
+│       └── executor.py           # Paper trade execution with orderbook simulation
 ├── logs/
 │   ├── backtest_log.json         # Full backtest output
 │   ├── trade_log.jsonl           # Trade-by-trade log
@@ -403,6 +396,26 @@ sentinel/
 
 ---
 
+## Current Status & Roadmap
+
+### ✅ What's Built & Working
+- **News ingestion pipeline** — Concurrent multi-source RSS with deduplication and latency tracking
+- **Polymarket market data client** — Fetches active markets via Gamma API and live orderbooks via CLOB API
+- **AI analysis engine** — Structured LLM prompting with Claude/OpenAI support; includes deterministic mock mode for demos without API keys
+- **Bayesian confidence scoring** — Full mathematical pipeline: evidence weighting, time decay, multi-source aggregation, Kelly criterion sizing, orderbook adjustment
+- **Paper trading execution** — Realistic fill simulation by walking the orderbook with slippage modeling
+- **Agent orchestration loop** — Ties all modules together in a continuous autonomous cycle
+- **Backtest simulation** — End-to-end demo with 8 news cycles, 8 executed trades, and 5 risk-rejected trades
+
+### 🔜 Roadmap (Post-Hackathon)
+- **Live execution** — Wire `py-clob-client` SDK into the execution engine for real Polymarket trades
+- **WebSocket streaming** — Replace RSS polling with Polymarket WebSocket for sub-second market data
+- **LLM provider config** — Expose provider/model/API URL via environment variables for easy switching
+- **Historical backtesting** — Replay against archived news + historical Polymarket price data
+- **Dashboard UI** — Web-based monitoring dashboard for live agent status
+
+---
+
 ## License
 
 MIT License — see [LICENSE](LICENSE) for details.
@@ -410,12 +423,7 @@ MIT License — see [LICENSE](LICENSE) for details.
 ---
 
 ## Team
-Leo Song,
-Victor Song,
-Aadit Jerfy,
-Tharun Ekambaran
+
+**Leo Song** · **Victor Song** · **Aadit Jerfy** · **Tharun Ekambaran**
 
 Built at Penn Blockchain Conference 2026 Hackathon.
-=======
-# PolymarketPBC
->>>>>>> 9fb1a9487a66bbd84da9fa577e17a09e7a6c0691

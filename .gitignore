@@ -1,8 +1,10 @@
 __pycache__/
 *.pyc
 .env
-logs/*.json
-logs/*.jsonl
+logs/trade_log.jsonl
+logs/cycle_log.jsonl
+logs/portfolio_state.json
+# Keep backtest_log.json — it's a required deliverable
 *.egg-info/
 dist/
 build/

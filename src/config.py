@@ -59,11 +59,20 @@ class ScoringConfig:
 @dataclass
 class ExecutionConfig:
     """Trade execution configuration."""
-    mode: str = "paper"  # "paper" or "live"
+    mode: str = "paper"  # "paper" only (live not yet implemented)
     initial_bankroll: float = 10000.0  # Starting paper bankroll in USDC
     min_order_size: float = 5.0  # Minimum order size in USDC
     max_slippage_pct: float = 0.02  # Max 2% slippage tolerance
     order_type: str = "GTC"  # Good-til-cancelled
+
+
+@dataclass
+class LLMConfig:
+    """LLM analysis engine configuration."""
+    provider: str = "anthropic"  # "anthropic" or "openai"
+    api_key: Optional[str] = None
+    model: str = "claude-sonnet-4-20250514"
+    api_url: str = "https://api.anthropic.com/v1/messages"
 
 
 @dataclass
@@ -73,6 +82,7 @@ class AgentConfig:
     news: NewsConfig = field(default_factory=NewsConfig)
     scoring: ScoringConfig = field(default_factory=ScoringConfig)
     execution: ExecutionConfig = field(default_factory=ExecutionConfig)
+    llm: LLMConfig = field(default_factory=LLMConfig)
     
     # Agent loop
     cycle_interval_seconds: int = 60
@@ -82,10 +92,28 @@ class AgentConfig:
     def from_env(cls) -> "AgentConfig":
         """Load config from environment variables."""
         config = cls()
+        
+        # Polymarket
         config.polymarket.private_key = os.getenv("POLYMARKET_PRIVATE_KEY")
         config.polymarket.funder_address = os.getenv("POLYMARKET_FUNDER_ADDRESS")
         if os.getenv("POLYMARKET_SIG_TYPE"):
             config.polymarket.signature_type = int(os.getenv("POLYMARKET_SIG_TYPE"))
+        
+        # Execution
         if os.getenv("EXECUTION_MODE"):
             config.execution.mode = os.getenv("EXECUTION_MODE")
+        
+        # LLM provider — auto-detect from available API keys
+        if os.getenv("ANTHROPIC_API_KEY"):
+            config.llm.provider = "anthropic"
+            config.llm.api_key = os.getenv("ANTHROPIC_API_KEY")
+            config.llm.model = os.getenv("LLM_MODEL", "claude-sonnet-4-20250514")
+            config.llm.api_url = "https://api.anthropic.com/v1/messages"
+        elif os.getenv("OPENAI_API_KEY"):
+            config.llm.provider = "openai"
+            config.llm.api_key = os.getenv("OPENAI_API_KEY")
+            config.llm.model = os.getenv("LLM_MODEL", "gpt-4o")
+            config.llm.api_url = "https://api.openai.com/v1/chat/completions"
+        # If neither key is set, analysis engine uses mock mode (no API calls)
+        
         return config

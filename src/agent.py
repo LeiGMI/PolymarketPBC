@@ -46,7 +46,12 @@ class PolymarketAgent:
             max_articles=self.config.news.max_articles_per_cycle,
         )
         self.market_client = MarketDataClient()
-        self.analysis_engine = AnalysisEngine()
+        self.analysis_engine = AnalysisEngine(
+            api_key=self.config.llm.api_key,
+            api_url=self.config.llm.api_url,
+            model=self.config.llm.model,
+            provider=self.config.llm.provider,
+        )
         self.scorer = ConfidenceScorer(
             evidence_weight=self.config.scoring.evidence_weight,
             kelly_fraction=self.config.scoring.kelly_fraction,

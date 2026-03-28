@@ -139,12 +139,13 @@ class Portfolio:
 
 class ExecutionEngine:
     """
-    Handles trade execution in paper or live mode.
+    Handles trade execution in paper mode.
     
     Paper mode: Simulates fills against real orderbook data with
     realistic slippage modeling.
     
-    Live mode: Executes via Polymarket py-clob-client SDK.
+    Live mode: Not yet implemented — architected for future integration
+    with the Polymarket py-clob-client SDK.
     """
     
     def __init__(
@@ -267,8 +268,18 @@ class ExecutionEngine:
         return trade
     
     async def _execute_live(self, signal) -> Optional[TradeRecord]:
-        """Execute a live trade via Polymarket SDK."""
-        logger.warning("Live trading requires py-clob-client setup. Using paper mode.")
+        """
+        Live trading via Polymarket SDK — not yet implemented.
+        
+        This method is a placeholder for future integration with
+        py-clob-client. For now, it falls back to paper execution
+        so the full pipeline can still be demonstrated end-to-end.
+        """
+        logger.warning(
+            "Live trading is not yet implemented. "
+            "Falling back to paper execution. "
+            "See roadmap in README for py-clob-client integration plan."
+        )
         return await self._execute_paper(signal)
     
     def _simulate_fill(self, signal, orderbook=None) -> float:

@@ -1,0 +1,1268 @@
+{
+  "metadata": {
+    "simulation_id": "bt_1774664967",
+    "start_time": "2026-03-28T02:29:27.699742+00:00",
+    "initial_bankroll": 10000.0,
+    "num_markets": 10,
+    "num_news_events": 8,
+    "scoring_params": {
+      "evidence_weight": 0.4,
+      "kelly_fraction": 0.25,
+      "min_edge_threshold": 0.03,
+      "max_position_pct": 0.1,
+      "decay_half_life_hours": 4.0,
+      "note": "Backtest uses more aggressive evidence_weight (0.40 vs 0.15 production) to demonstrate trading pipeline. Production config is more conservative."
+    }
+  },
+  "cycles": [
+    {
+      "cycle_id": 1,
+      "timestamp": "2026-03-27T19:29:27.699799+00:00",
+      "news_event": {
+        "title": "Federal Reserve signals potential rate pause at upcoming meeting",
+        "description": "Fed Chair indicates economic data may warrant holding rates steady, citing cooling inflation and stable employment figures.",
+        "source": "Reuters",
+        "category": "economics",
+        "keywords": [
+          "fed",
+          "rate",
+          "interest",
+          "inflation",
+          "economy",
+          "cut"
+        ]
+      },
+      "analysis": [
+        {
+          "market_slug": "fed-rate-cut-next-meeting",
+          "market_question": "Will the Fed cut interest rates at the next meeting?",
+          "direction": "UP",
+          "probability_shift": 0.103,
+          "confidence": 0.9,
+          "reasoning": "News about economics directly affects market: 'Will the Fed cut interest rates at the next meeting?'"
+        },
+        {
+          "market_slug": "ecb-rate-cut-surprise",
+          "market_question": "Will the ECB cut rates more than expected in 2026?",
+          "direction": "UP",
+          "probability_shift": 0.093,
+          "confidence": 0.83,
+          "reasoning": "News about economics directly affects market: 'Will the ECB cut rates more than expected in 2026?'"
+        }
+      ],
+      "signals": [
+        {
+          "market_slug": "fed-rate-cut-next-meeting",
+          "market_question": "Will the Fed cut interest rates at the next meeting?",
+          "token_id": "tok_yes_fed-rate-cut-next-meeting",
+          "side": "BUY",
+          "outcome": "Yes",
+          "market_price": 0.45,
+          "agent_price": 0.5056,
+          "edge": 0.0556,
+          "edge_pct": "+5.6%",
+          "kelly_fraction": 0.0228,
+          "position_size_usdc": 142.34,
+          "limit_price": 0.4561,
+          "confidence_score": 0.769,
+          "evidence_count": 1,
+          "source_agreement": false,
+          "freshness_weight": 1.0,
+          "spread_cost": 0.0122,
+          "depth_score": 0.666,
+          "reasoning": "News about economics directly affects market: 'Will the Fed cut interest rates at the next meeting?'",
+          "causal_chain": "Federal Reserve signals potential rate pause at up... \u2192 UP pressure on 'Will the Fed cut interest rates at the next meetin...'",
+          "created_at": "2026-03-28T02:29:27.703432+00:00",
+          "expected_value": 15.45
+        },
+        {
+          "market_slug": "ecb-rate-cut-surprise",
+          "market_question": "Will the ECB cut rates more than expected in 2026?",
+          "token_id": "tok_yes_ecb-rate-cut-surprise",
+          "side": "BUY",
+          "outcome": "Yes",
+          "market_price": 0.35,
+          "agent_price": 0.3963,
+          "edge": 0.0463,
+          "edge_pct": "+4.6%",
+          "kelly_fraction": 0.0158,
+          "position_size_usdc": 88.16,
+          "limit_price": 0.3557,
+          "confidence_score": 0.73,
+          "evidence_count": 1,
+          "source_agreement": false,
+          "freshness_weight": 1.0,
+          "spread_cost": 0.0114,
+          "depth_score": 0.602,
+          "reasoning": "News about economics directly affects market: 'Will the ECB cut rates more than expected in 2026?'",
+          "causal_chain": "Federal Reserve signals potential rate pause at up... \u2192 UP pressure on 'Will the ECB cut rates more than expected in 2026?...'",
+          "created_at": "2026-03-28T02:29:27.704191+00:00",
+          "expected_value": 10.07
+        }
+      ],
+      "trades": [
+        {
+          "trade_id": "7e6c6465",
+          "timestamp": "2026-03-28T02:29:27.703640+00:00",
+          "market_slug": "fed-rate-cut-next-meeting",
+          "market_question": "Will the Fed cut interest rates at the next meeting?",
+          "token_id": "tok_yes_fed-rate-cut-next-meeting",
+          "side": "BUY",
+          "outcome": "Yes",
+          "limit_price": 0.4561,
+          "fill_price": 0.4561,
+          "slippage": 0.0,
+          "size_usdc": 142.34,
+          "shares_acquired": 312.08,
+          "edge": 0.0556,
+          "confidence": 0.769,
+          "kelly_fraction": 0.0228,
+          "mode": "paper",
+          "order_id": null,
+          "status": "filled",
+          "current_price": null,
+          "unrealized_pnl": null
+        },
+        {
+          "trade_id": "704739a4",
+          "timestamp": "2026-03-28T02:29:27.704308+00:00",
+          "market_slug": "ecb-rate-cut-surprise",
+          "market_question": "Will the ECB cut rates more than expected in 2026?",
+          "token_id": "tok_yes_ecb-rate-cut-surprise",
+          "side": "BUY",
+          "outcome": "Yes",
+          "limit_price": 0.3557,
+          "fill_price": 0.3598,
+          "slippage": 0.0041,
+          "size_usdc": 88.16,
+          "shares_acquired": 245.05,
+          "edge": 0.0463,
+          "confidence": 0.73,
+          "kelly_fraction": 0.0158,
+          "mode": "paper",
+          "order_id": null,
+          "status": "filled",
+          "current_price": null,
+          "unrealized_pnl": null
+        }
+      ],
+      "portfolio_snapshot": {
+        "initial_bankroll": 10000.0,
+        "cash": 9769.5,
+        "total_value": 10004.09,
+        "total_pnl": 4.09,
+        "total_pnl_pct": 0.04,
+        "num_trades": 2,
+        "num_open_positions": 2,
+        "win_rate": null,
+        "positions": {
+          "tok_yes_fed-rate-cut-next-meeting": {
+            "shares": 312.08,
+            "avg_price": 0.4561,
+            "cost_basis": 142.34,
+            "market_question": "Will the Fed cut interest rates at the next meeting?",
+            "outcome": "Yes"
+          },
+          "tok_yes_ecb-rate-cut-surprise": {
+            "shares": 245.05,
+            "avg_price": 0.3598,
+            "cost_basis": 88.16,
+            "market_question": "Will the ECB cut rates more than expected in 2026?",
+            "outcome": "Yes"
+          }
+        }
+      }
+    },
+    {
+      "cycle_id": 2,
+      "timestamp": "2026-03-27T20:29:27.704784+00:00",
+      "news_event": {
+        "title": "Major tech company announces breakthrough in AI model efficiency",
+        "description": "New research paper shows 10x reduction in compute costs for large language model training, potentially accelerating AI deployment.",
+        "source": "Bloomberg",
+        "category": "technology",
+        "keywords": [
+          "ai",
+          "tech",
+          "model",
+          "compute",
+          "breakthrough",
+          "efficiency"
+        ]
+      },
+      "analysis": [
+        {
+          "market_slug": "gpt5-release-sep",
+          "market_question": "Will GPT-5 or a comparable AI model be released before September 2026?",
+          "direction": "UP",
+          "probability_shift": 0.156,
+          "confidence": 0.9,
+          "reasoning": "News about technology directly affects market: 'Will GPT-5 or a comparable AI model be released before Septe'"
+        }
+      ],
+      "signals": [
+        {
+          "market_slug": "gpt5-release-sep",
+          "market_question": "Will GPT-5 or a comparable AI model be released before September 2026?",
+          "token_id": "tok_yes_gpt5-release-sep",
+          "side": "BUY",
+          "outcome": "Yes",
+          "market_price": 0.4,
+          "agent_price": 0.4842,
+          "edge": 0.0842,
+          "edge_pct": "+8.4%",
+          "kelly_fraction": 0.0326,
+          "position_size_usdc": 179.14,
+          "limit_price": 0.407,
+          "confidence_score": 0.753,
+          "evidence_count": 1,
+          "source_agreement": false,
+          "freshness_weight": 1.0,
+          "spread_cost": 0.014,
+          "depth_score": 0.605,
+          "reasoning": "News about technology directly affects market: 'Will GPT-5 or a comparable AI model be released before Septe'",
+          "causal_chain": "Major tech company announces breakthrough in AI mo... \u2192 UP pressure on 'Will GPT-5 or a comparable AI model be released be...'",
+          "created_at": "2026-03-28T02:29:27.704937+00:00",
+          "expected_value": 34.0
+        }
+      ],
+      "trades": [
+        {
+          "trade_id": "f0601429",
+          "timestamp": "2026-03-28T02:29:27.705051+00:00",
+          "market_slug": "gpt5-release-sep",
+          "market_question": "Will GPT-5 or a comparable AI model be released before September 2026?",
+          "token_id": "tok_yes_gpt5-release-sep",
+          "side": "BUY",
+          "outcome": "Yes",
+          "limit_price": 0.407,
+          "fill_price": 0.4135,
+          "slippage": 0.0065,
+          "size_usdc": 179.14,
+          "shares_acquired": 433.25,
+          "edge": 0.0842,
+          "confidence": 0.753,
+          "kelly_fraction": 0.0326,
+          "mode": "paper",
+          "order_id": null,
+          "status": "filled",
+          "current_price": null,
+          "unrealized_pnl": null
+        }
+      ],
+      "portfolio_snapshot": {
+        "initial_bankroll": 10000.0,
+        "cash": 9590.36,
+        "total_value": 10000.21,
+        "total_pnl": 0.21,
+        "total_pnl_pct": 0.0,
+        "num_trades": 3,
+        "num_open_positions": 3,
+        "win_rate": null,
+        "positions": {
+          "tok_yes_fed-rate-cut-next-meeting": {
+            "shares": 312.08,
+            "avg_price": 0.4561,
+            "cost_basis": 142.34,
+            "market_question": "Will the Fed cut interest rates at the next meeting?",
+            "outcome": "Yes"
+          },
+          "tok_yes_ecb-rate-cut-surprise": {
+            "shares": 245.05,
+            "avg_price": 0.3598,
+            "cost_basis": 88.16,
+            "market_question": "Will the ECB cut rates more than expected in 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_gpt5-release-sep": {
+            "shares": 433.25,
+            "avg_price": 0.4135,
+            "cost_basis": 179.14,
+            "market_question": "Will GPT-5 or a comparable AI model be released before September 2026?",
+            "outcome": "Yes"
+          }
+        }
+      }
+    },
+    {
+      "cycle_id": 3,
+      "timestamp": "2026-03-27T21:29:27.705459+00:00",
+      "news_event": {
+        "title": "Senate committee advances bipartisan cryptocurrency regulation bill",
+        "description": "The bill would establish clear regulatory framework for digital assets, with provisions for stablecoin oversight and exchange licensing.",
+        "source": "Politico",
+        "category": "politics",
+        "keywords": [
+          "crypto",
+          "regulation",
+          "senate",
+          "bill",
+          "digital",
+          "exchange"
+        ]
+      },
+      "analysis": [
+        {
+          "market_slug": "btc-150k-july",
+          "market_question": "Will Bitcoin exceed $150K by July 2026?",
+          "direction": "UP",
+          "probability_shift": 0.085,
+          "confidence": 0.9,
+          "reasoning": "News about politics directly affects market: 'Will Bitcoin exceed $150K by July 2026?'"
+        },
+        {
+          "market_slug": "us-crypto-regulation-2026",
+          "market_question": "Will the US pass comprehensive crypto regulation in 2026?",
+          "direction": "UP",
+          "probability_shift": 0.135,
+          "confidence": 0.9,
+          "reasoning": "News about politics directly affects market: 'Will the US pass comprehensive crypto regulation in 2026?'"
+        },
+        {
+          "market_slug": "crypto-exchange-hack-2026",
+          "market_question": "Will a major crypto exchange suffer a hack exceeding $50M in 2026?",
+          "direction": "DOWN",
+          "probability_shift": 0.088,
+          "confidence": 0.86,
+          "reasoning": "News about politics directly affects market: 'Will a major crypto exchange suffer a hack exceeding $50M in'"
+        }
+      ],
+      "signals": [
+        {
+          "market_slug": "btc-150k-july",
+          "market_question": "Will Bitcoin exceed $150K by July 2026?",
+          "token_id": "tok_yes_btc-150k-july",
+          "side": "BUY",
+          "outcome": "Yes",
+          "market_price": 0.32,
+          "agent_price": 0.3659,
+          "edge": 0.0459,
+          "edge_pct": "+4.6%",
+          "kelly_fraction": 0.0149,
+          "position_size_usdc": 84.68,
+          "limit_price": 0.3257,
+          "confidence_score": 0.763,
+          "evidence_count": 1,
+          "source_agreement": false,
+          "freshness_weight": 1.0,
+          "spread_cost": 0.0114,
+          "depth_score": 0.628,
+          "reasoning": "News about politics directly affects market: 'Will Bitcoin exceed $150K by July 2026?'",
+          "causal_chain": "Senate committee advances bipartisan cryptocurrenc... \u2192 UP pressure on 'Will Bitcoin exceed $150K by July 2026?...'",
+          "created_at": "2026-03-28T02:29:27.705645+00:00",
+          "expected_value": 10.45
+        },
+        {
+          "market_slug": "us-crypto-regulation-2026",
+          "market_question": "Will the US pass comprehensive crypto regulation in 2026?",
+          "token_id": "tok_yes_us-crypto-regulation-2026",
+          "side": "BUY",
+          "outcome": "Yes",
+          "market_price": 0.55,
+          "agent_price": 0.6229,
+          "edge": 0.0729,
+          "edge_pct": "+7.3%",
+          "kelly_fraction": 0.0375,
+          "position_size_usdc": 231.56,
+          "limit_price": 0.5564,
+          "confidence_score": 0.773,
+          "evidence_count": 1,
+          "source_agreement": false,
+          "freshness_weight": 1.0,
+          "spread_cost": 0.0128,
+          "depth_score": 0.694,
+          "reasoning": "News about politics directly affects market: 'Will the US pass comprehensive crypto regulation in 2026?'",
+          "causal_chain": "Senate committee advances bipartisan cryptocurrenc... \u2192 UP pressure on 'Will the US pass comprehensive crypto regulation i...'",
+          "created_at": "2026-03-28T02:29:27.706025+00:00",
+          "expected_value": 27.68
+        },
+        {
+          "market_slug": "crypto-exchange-hack-2026",
+          "market_question": "Will a major crypto exchange suffer a hack exceeding $50M in 2026?",
+          "token_id": "tok_no_crypto-exchange-hack-2026",
+          "side": "BUY",
+          "outcome": "No",
+          "market_price": 0.28,
+          "agent_price": 0.2346,
+          "edge": -0.0454,
+          "edge_pct": "-4.5%",
+          "kelly_fraction": 0.0358,
+          "position_size_usdc": 189.87,
+          "limit_price": 0.7262,
+          "confidence_score": 0.741,
+          "evidence_count": 1,
+          "source_agreement": false,
+          "freshness_weight": 1.0,
+          "spread_cost": 0.0124,
+          "depth_score": 0.61,
+          "reasoning": "News about politics directly affects market: 'Will a major crypto exchange suffer a hack exceeding $50M in'",
+          "causal_chain": "Senate committee advances bipartisan cryptocurrenc... \u2192 DOWN pressure on 'Will a major crypto exchange suffer a hack exceedi...'",
+          "created_at": "2026-03-28T02:29:27.706372+00:00",
+          "expected_value": 10.25
+        }
+      ],
+      "trades": [
+        {
+          "trade_id": "9806365e",
+          "timestamp": "2026-03-28T02:29:27.705750+00:00",
+          "market_slug": "btc-150k-july",
+          "market_question": "Will Bitcoin exceed $150K by July 2026?",
+          "token_id": "tok_yes_btc-150k-july",
+          "side": "BUY",
+          "outcome": "Yes",
+          "limit_price": 0.3257,
+          "fill_price": 0.3257,
+          "slippage": -0.0,
+          "size_usdc": 84.68,
+          "shares_acquired": 259.99,
+          "edge": 0.0459,
+          "confidence": 0.763,
+          "kelly_fraction": 0.0149,
+          "mode": "paper",
+          "order_id": null,
+          "status": "filled",
+          "current_price": null,
+          "unrealized_pnl": null
+        },
+        {
+          "trade_id": "d34699e6",
+          "timestamp": "2026-03-28T02:29:27.706097+00:00",
+          "market_slug": "us-crypto-regulation-2026",
+          "market_question": "Will the US pass comprehensive crypto regulation in 2026?",
+          "token_id": "tok_yes_us-crypto-regulation-2026",
+          "side": "BUY",
+          "outcome": "Yes",
+          "limit_price": 0.5564,
+          "fill_price": 0.5564,
+          "slippage": 0.0,
+          "size_usdc": 231.56,
+          "shares_acquired": 416.18,
+          "edge": 0.0729,
+          "confidence": 0.773,
+          "kelly_fraction": 0.0375,
+          "mode": "paper",
+          "order_id": null,
+          "status": "filled",
+          "current_price": null,
+          "unrealized_pnl": null
+        }
+      ],
+      "portfolio_snapshot": {
+        "initial_bankroll": 10000.0,
+        "cash": 9274.12,
+        "total_value": 9989.27,
+        "total_pnl": -10.73,
+        "total_pnl_pct": -0.11,
+        "num_trades": 5,
+        "num_open_positions": 5,
+        "win_rate": null,
+        "positions": {
+          "tok_yes_fed-rate-cut-next-meeting": {
+            "shares": 312.08,
+            "avg_price": 0.4561,
+            "cost_basis": 142.34,
+            "market_question": "Will the Fed cut interest rates at the next meeting?",
+            "outcome": "Yes"
+          },
+          "tok_yes_ecb-rate-cut-surprise": {
+            "shares": 245.05,
+            "avg_price": 0.3598,
+            "cost_basis": 88.16,
+            "market_question": "Will the ECB cut rates more than expected in 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_gpt5-release-sep": {
+            "shares": 433.25,
+            "avg_price": 0.4135,
+            "cost_basis": 179.14,
+            "market_question": "Will GPT-5 or a comparable AI model be released before September 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_btc-150k-july": {
+            "shares": 259.99,
+            "avg_price": 0.3257,
+            "cost_basis": 84.68,
+            "market_question": "Will Bitcoin exceed $150K by July 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_us-crypto-regulation-2026": {
+            "shares": 416.18,
+            "avg_price": 0.5564,
+            "cost_basis": 231.56,
+            "market_question": "Will the US pass comprehensive crypto regulation in 2026?",
+            "outcome": "Yes"
+          }
+        }
+      }
+    },
+    {
+      "cycle_id": 4,
+      "timestamp": "2026-03-27T22:29:27.706584+00:00",
+      "news_event": {
+        "title": "European Central Bank surprises with larger-than-expected rate cut",
+        "description": "ECB cuts rates by 50 basis points, exceeding market expectations of 25bp, citing deteriorating economic outlook in the eurozone.",
+        "source": "Financial Times",
+        "category": "economics",
+        "keywords": [
+          "ecb",
+          "rate",
+          "cut",
+          "europe",
+          "economy",
+          "monetary"
+        ]
+      },
+      "analysis": [
+        {
+          "market_slug": "ecb-rate-cut-surprise",
+          "market_question": "Will the ECB cut rates more than expected in 2026?",
+          "direction": "DOWN",
+          "probability_shift": 0.106,
+          "confidence": 0.9,
+          "reasoning": "News about economics directly affects market: 'Will the ECB cut rates more than expected in 2026?'"
+        },
+        {
+          "market_slug": "fed-rate-cut-next-meeting",
+          "market_question": "Will the Fed cut interest rates at the next meeting?",
+          "direction": "DOWN",
+          "probability_shift": 0.069,
+          "confidence": 0.87,
+          "reasoning": "News about economics directly affects market: 'Will the Fed cut interest rates at the next meeting?'"
+        }
+      ],
+      "signals": [
+        {
+          "market_slug": "ecb-rate-cut-surprise",
+          "market_question": "Will the ECB cut rates more than expected in 2026?",
+          "token_id": "tok_no_ecb-rate-cut-surprise",
+          "side": "BUY",
+          "outcome": "No",
+          "market_price": 0.35,
+          "agent_price": 0.2928,
+          "edge": -0.0572,
+          "edge_pct": "-5.7%",
+          "kelly_fraction": 0.0372,
+          "position_size_usdc": 204.66,
+          "limit_price": 0.656,
+          "confidence_score": 0.762,
+          "evidence_count": 1,
+          "source_agreement": false,
+          "freshness_weight": 1.0,
+          "spread_cost": 0.012,
+          "depth_score": 0.63,
+          "reasoning": "News about economics directly affects market: 'Will the ECB cut rates more than expected in 2026?'",
+          "causal_chain": "European Central Bank surprises with larger-than-e... \u2192 DOWN pressure on 'Will the ECB cut rates more than expected in 2026?...'",
+          "created_at": "2026-03-28T02:29:27.706709+00:00",
+          "expected_value": 15.99
+        },
+        {
+          "market_slug": "fed-rate-cut-next-meeting",
+          "market_question": "Will the Fed cut interest rates at the next meeting?",
+          "token_id": "tok_no_fed-rate-cut-next-meeting",
+          "side": "BUY",
+          "outcome": "No",
+          "market_price": 0.45,
+          "agent_price": 0.414,
+          "edge": -0.036,
+          "edge_pct": "-3.6%",
+          "kelly_fraction": 0.0166,
+          "position_size_usdc": 86.02,
+          "limit_price": 0.5566,
+          "confidence_score": 0.741,
+          "evidence_count": 1,
+          "source_agreement": false,
+          "freshness_weight": 1.0,
+          "spread_cost": 0.0132,
+          "depth_score": 0.599,
+          "reasoning": "News about economics directly affects market: 'Will the Fed cut interest rates at the next meeting?'",
+          "causal_chain": "European Central Bank surprises with larger-than-e... \u2192 DOWN pressure on 'Will the Fed cut interest rates at the next meetin...'",
+          "created_at": "2026-03-28T02:29:27.706838+00:00",
+          "expected_value": 4.55
+        }
+      ],
+      "trades": [],
+      "portfolio_snapshot": {
+        "initial_bankroll": 10000.0,
+        "cash": 9274.12,
+        "total_value": 9990.69,
+        "total_pnl": -9.31,
+        "total_pnl_pct": -0.09,
+        "num_trades": 5,
+        "num_open_positions": 5,
+        "win_rate": null,
+        "positions": {
+          "tok_yes_fed-rate-cut-next-meeting": {
+            "shares": 312.08,
+            "avg_price": 0.4561,
+            "cost_basis": 142.34,
+            "market_question": "Will the Fed cut interest rates at the next meeting?",
+            "outcome": "Yes"
+          },
+          "tok_yes_ecb-rate-cut-surprise": {
+            "shares": 245.05,
+            "avg_price": 0.3598,
+            "cost_basis": 88.16,
+            "market_question": "Will the ECB cut rates more than expected in 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_gpt5-release-sep": {
+            "shares": 433.25,
+            "avg_price": 0.4135,
+            "cost_basis": 179.14,
+            "market_question": "Will GPT-5 or a comparable AI model be released before September 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_btc-150k-july": {
+            "shares": 259.99,
+            "avg_price": 0.3257,
+            "cost_basis": 84.68,
+            "market_question": "Will Bitcoin exceed $150K by July 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_us-crypto-regulation-2026": {
+            "shares": 416.18,
+            "avg_price": 0.5564,
+            "cost_basis": 231.56,
+            "market_question": "Will the US pass comprehensive crypto regulation in 2026?",
+            "outcome": "Yes"
+          }
+        }
+      }
+    },
+    {
+      "cycle_id": 5,
+      "timestamp": "2026-03-27T23:29:27.707013+00:00",
+      "news_event": {
+        "title": "Poll shows significant shift in key swing state ahead of election",
+        "description": "New high-quality poll shows a 5-point swing in voter preferences, potentially reshaping the electoral map.",
+        "source": "NYT/Siena",
+        "category": "politics",
+        "keywords": [
+          "poll",
+          "election",
+          "swing",
+          "vote",
+          "candidate",
+          "state"
+        ]
+      },
+      "analysis": [
+        {
+          "market_slug": "election-poll-swing-state",
+          "market_question": "Will any major election poll shift by 5+ points in a swing state?",
+          "direction": "DOWN",
+          "probability_shift": 0.126,
+          "confidence": 0.9,
+          "reasoning": "News about politics directly affects market: 'Will any major election poll shift by 5+ points in a swing s'"
+        }
+      ],
+      "signals": [
+        {
+          "market_slug": "election-poll-swing-state",
+          "market_question": "Will any major election poll shift by 5+ points in a swing state?",
+          "token_id": "tok_no_election-poll-swing-state",
+          "side": "BUY",
+          "outcome": "No",
+          "market_price": 0.3,
+          "agent_price": 0.232,
+          "edge": -0.068,
+          "edge_pct": "-6.8%",
+          "kelly_fraction": 0.0532,
+          "position_size_usdc": 266.16,
+          "limit_price": 0.7054,
+          "confidence_score": 0.753,
+          "evidence_count": 1,
+          "source_agreement": false,
+          "freshness_weight": 1.0,
+          "spread_cost": 0.0108,
+          "depth_score": 0.571,
+          "reasoning": "News about politics directly affects market: 'Will any major election poll shift by 5+ points in a swing s'",
+          "causal_chain": "Poll shows significant shift in key swing state ah... \u2192 DOWN pressure on 'Will any major election poll shift by 5+ points in...'",
+          "created_at": "2026-03-28T02:29:27.707109+00:00",
+          "expected_value": 23.64
+        }
+      ],
+      "trades": [],
+      "portfolio_snapshot": {
+        "initial_bankroll": 10000.0,
+        "cash": 9274.12,
+        "total_value": 10023.67,
+        "total_pnl": 23.67,
+        "total_pnl_pct": 0.24,
+        "num_trades": 5,
+        "num_open_positions": 5,
+        "win_rate": null,
+        "positions": {
+          "tok_yes_fed-rate-cut-next-meeting": {
+            "shares": 312.08,
+            "avg_price": 0.4561,
+            "cost_basis": 142.34,
+            "market_question": "Will the Fed cut interest rates at the next meeting?",
+            "outcome": "Yes"
+          },
+          "tok_yes_ecb-rate-cut-surprise": {
+            "shares": 245.05,
+            "avg_price": 0.3598,
+            "cost_basis": 88.16,
+            "market_question": "Will the ECB cut rates more than expected in 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_gpt5-release-sep": {
+            "shares": 433.25,
+            "avg_price": 0.4135,
+            "cost_basis": 179.14,
+            "market_question": "Will GPT-5 or a comparable AI model be released before September 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_btc-150k-july": {
+            "shares": 259.99,
+            "avg_price": 0.3257,
+            "cost_basis": 84.68,
+            "market_question": "Will Bitcoin exceed $150K by July 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_us-crypto-regulation-2026": {
+            "shares": 416.18,
+            "avg_price": 0.5564,
+            "cost_basis": 231.56,
+            "market_question": "Will the US pass comprehensive crypto regulation in 2026?",
+            "outcome": "Yes"
+          }
+        }
+      }
+    },
+    {
+      "cycle_id": 6,
+      "timestamp": "2026-03-28T00:29:27.707284+00:00",
+      "news_event": {
+        "title": "Major cryptocurrency exchange reports security breach affecting user funds",
+        "description": "Exchange confirms unauthorized access to hot wallets, estimated losses in the tens of millions. User funds partially affected.",
+        "source": "CoinDesk",
+        "category": "crypto",
+        "keywords": [
+          "exchange",
+          "hack",
+          "security",
+          "crypto",
+          "breach",
+          "digital"
+        ]
+      },
+      "analysis": [
+        {
+          "market_slug": "btc-150k-july",
+          "market_question": "Will Bitcoin exceed $150K by July 2026?",
+          "direction": "DOWN",
+          "probability_shift": 0.096,
+          "confidence": 0.9,
+          "reasoning": "News about crypto directly affects market: 'Will Bitcoin exceed $150K by July 2026?'"
+        },
+        {
+          "market_slug": "crypto-exchange-hack-2026",
+          "market_question": "Will a major crypto exchange suffer a hack exceeding $50M in 2026?",
+          "direction": "UP",
+          "probability_shift": 0.103,
+          "confidence": 0.9,
+          "reasoning": "News about crypto directly affects market: 'Will a major crypto exchange suffer a hack exceeding $50M in'"
+        },
+        {
+          "market_slug": "us-crypto-regulation-2026",
+          "market_question": "Will the US pass comprehensive crypto regulation in 2026?",
+          "direction": "DOWN",
+          "probability_shift": 0.063,
+          "confidence": 0.69,
+          "reasoning": "News about crypto directly affects market: 'Will the US pass comprehensive crypto regulation in 2026?'"
+        }
+      ],
+      "signals": [
+        {
+          "market_slug": "btc-150k-july",
+          "market_question": "Will Bitcoin exceed $150K by July 2026?",
+          "token_id": "tok_no_btc-150k-july",
+          "side": "BUY",
+          "outcome": "No",
+          "market_price": 0.32,
+          "agent_price": 0.2682,
+          "edge": -0.0518,
+          "edge_pct": "-5.2%",
+          "kelly_fraction": 0.0362,
+          "position_size_usdc": 179.05,
+          "limit_price": 0.6864,
+          "confidence_score": 0.748,
+          "evidence_count": 1,
+          "source_agreement": false,
+          "freshness_weight": 1.0,
+          "spread_cost": 0.0128,
+          "depth_score": 0.569,
+          "reasoning": "News about crypto directly affects market: 'Will Bitcoin exceed $150K by July 2026?'",
+          "causal_chain": "Major cryptocurrency exchange reports security bre... \u2192 DOWN pressure on 'Will Bitcoin exceed $150K by July 2026?...'",
+          "created_at": "2026-03-28T02:29:27.707411+00:00",
+          "expected_value": 11.85
+        },
+        {
+          "market_slug": "crypto-exchange-hack-2026",
+          "market_question": "Will a major crypto exchange suffer a hack exceeding $50M in 2026?",
+          "token_id": "tok_yes_crypto-exchange-hack-2026",
+          "side": "BUY",
+          "outcome": "Yes",
+          "market_price": 0.28,
+          "agent_price": 0.3356,
+          "edge": 0.0556,
+          "edge_pct": "+5.6%",
+          "kelly_fraction": 0.0173,
+          "position_size_usdc": 94.83,
+          "limit_price": 0.2861,
+          "confidence_score": 0.761,
+          "evidence_count": 1,
+          "source_agreement": false,
+          "freshness_weight": 1.0,
+          "spread_cost": 0.0122,
+          "depth_score": 0.628,
+          "reasoning": "News about crypto directly affects market: 'Will a major crypto exchange suffer a hack exceeding $50M in'",
+          "causal_chain": "Major cryptocurrency exchange reports security bre... \u2192 UP pressure on 'Will a major crypto exchange suffer a hack exceedi...'",
+          "created_at": "2026-03-28T02:29:27.707547+00:00",
+          "expected_value": 16.41
+        }
+      ],
+      "trades": [
+        {
+          "trade_id": "db096307",
+          "timestamp": "2026-03-28T02:29:27.707615+00:00",
+          "market_slug": "crypto-exchange-hack-2026",
+          "market_question": "Will a major crypto exchange suffer a hack exceeding $50M in 2026?",
+          "token_id": "tok_yes_crypto-exchange-hack-2026",
+          "side": "BUY",
+          "outcome": "Yes",
+          "limit_price": 0.2861,
+          "fill_price": 0.2861,
+          "slippage": 0.0,
+          "size_usdc": 94.83,
+          "shares_acquired": 331.46,
+          "edge": 0.0556,
+          "confidence": 0.761,
+          "kelly_fraction": 0.0173,
+          "mode": "paper",
+          "order_id": null,
+          "status": "filled",
+          "current_price": null,
+          "unrealized_pnl": null
+        }
+      ],
+      "portfolio_snapshot": {
+        "initial_bankroll": 10000.0,
+        "cash": 9179.29,
+        "total_value": 10022.96,
+        "total_pnl": 22.96,
+        "total_pnl_pct": 0.23,
+        "num_trades": 6,
+        "num_open_positions": 6,
+        "win_rate": null,
+        "positions": {
+          "tok_yes_fed-rate-cut-next-meeting": {
+            "shares": 312.08,
+            "avg_price": 0.4561,
+            "cost_basis": 142.34,
+            "market_question": "Will the Fed cut interest rates at the next meeting?",
+            "outcome": "Yes"
+          },
+          "tok_yes_ecb-rate-cut-surprise": {
+            "shares": 245.05,
+            "avg_price": 0.3598,
+            "cost_basis": 88.16,
+            "market_question": "Will the ECB cut rates more than expected in 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_gpt5-release-sep": {
+            "shares": 433.25,
+            "avg_price": 0.4135,
+            "cost_basis": 179.14,
+            "market_question": "Will GPT-5 or a comparable AI model be released before September 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_btc-150k-july": {
+            "shares": 259.99,
+            "avg_price": 0.3257,
+            "cost_basis": 84.68,
+            "market_question": "Will Bitcoin exceed $150K by July 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_us-crypto-regulation-2026": {
+            "shares": 416.18,
+            "avg_price": 0.5564,
+            "cost_basis": 231.56,
+            "market_question": "Will the US pass comprehensive crypto regulation in 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_crypto-exchange-hack-2026": {
+            "shares": 331.46,
+            "avg_price": 0.2861,
+            "cost_basis": 94.83,
+            "market_question": "Will a major crypto exchange suffer a hack exceeding $50M in 2026?",
+            "outcome": "Yes"
+          }
+        }
+      }
+    },
+    {
+      "cycle_id": 7,
+      "timestamp": "2026-03-28T01:29:27.707985+00:00",
+      "news_event": {
+        "title": "Climate summit reaches unexpected agreement on emissions targets",
+        "description": "Major emitters agree to accelerated timeline for carbon reduction, with binding commitments and financial mechanisms.",
+        "source": "BBC News",
+        "category": "environment",
+        "keywords": [
+          "climate",
+          "emissions",
+          "agreement",
+          "carbon",
+          "summit",
+          "binding"
+        ]
+      },
+      "analysis": [
+        {
+          "market_slug": "climate-agreement-2026",
+          "market_question": "Will a major global climate agreement be ratified in 2026?",
+          "direction": "UP",
+          "probability_shift": 0.111,
+          "confidence": 0.9,
+          "reasoning": "News about environment directly affects market: 'Will a major global climate agreement be ratified in 2026?'"
+        }
+      ],
+      "signals": [
+        {
+          "market_slug": "climate-agreement-2026",
+          "market_question": "Will a major global climate agreement be ratified in 2026?",
+          "token_id": "tok_yes_climate-agreement-2026",
+          "side": "BUY",
+          "outcome": "Yes",
+          "market_price": 0.2,
+          "agent_price": 0.2599,
+          "edge": 0.0599,
+          "edge_pct": "+6.0%",
+          "kelly_fraction": 0.017,
+          "position_size_usdc": 80.05,
+          "limit_price": 0.2061,
+          "confidence_score": 0.745,
+          "evidence_count": 1,
+          "source_agreement": false,
+          "freshness_weight": 1.0,
+          "spread_cost": 0.0122,
+          "depth_score": 0.548,
+          "reasoning": "News about environment directly affects market: 'Will a major global climate agreement be ratified in 2026?'",
+          "causal_chain": "Climate summit reaches unexpected agreement on emi... \u2192 UP pressure on 'Will a major global climate agreement be ratified ...'",
+          "created_at": "2026-03-28T02:29:27.708084+00:00",
+          "expected_value": 20.91
+        }
+      ],
+      "trades": [
+        {
+          "trade_id": "a203ed43",
+          "timestamp": "2026-03-28T02:29:27.708170+00:00",
+          "market_slug": "climate-agreement-2026",
+          "market_question": "Will a major global climate agreement be ratified in 2026?",
+          "token_id": "tok_yes_climate-agreement-2026",
+          "side": "BUY",
+          "outcome": "Yes",
+          "limit_price": 0.2061,
+          "fill_price": 0.2092,
+          "slippage": 0.0031,
+          "size_usdc": 80.05,
+          "shares_acquired": 382.61,
+          "edge": 0.0599,
+          "confidence": 0.745,
+          "kelly_fraction": 0.017,
+          "mode": "paper",
+          "order_id": null,
+          "status": "filled",
+          "current_price": null,
+          "unrealized_pnl": null
+        }
+      ],
+      "portfolio_snapshot": {
+        "initial_bankroll": 10000.0,
+        "cash": 9099.24,
+        "total_value": 10031.41,
+        "total_pnl": 31.41,
+        "total_pnl_pct": 0.31,
+        "num_trades": 7,
+        "num_open_positions": 7,
+        "win_rate": null,
+        "positions": {
+          "tok_yes_fed-rate-cut-next-meeting": {
+            "shares": 312.08,
+            "avg_price": 0.4561,
+            "cost_basis": 142.34,
+            "market_question": "Will the Fed cut interest rates at the next meeting?",
+            "outcome": "Yes"
+          },
+          "tok_yes_ecb-rate-cut-surprise": {
+            "shares": 245.05,
+            "avg_price": 0.3598,
+            "cost_basis": 88.16,
+            "market_question": "Will the ECB cut rates more than expected in 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_gpt5-release-sep": {
+            "shares": 433.25,
+            "avg_price": 0.4135,
+            "cost_basis": 179.14,
+            "market_question": "Will GPT-5 or a comparable AI model be released before September 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_btc-150k-july": {
+            "shares": 259.99,
+            "avg_price": 0.3257,
+            "cost_basis": 84.68,
+            "market_question": "Will Bitcoin exceed $150K by July 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_us-crypto-regulation-2026": {
+            "shares": 416.18,
+            "avg_price": 0.5564,
+            "cost_basis": 231.56,
+            "market_question": "Will the US pass comprehensive crypto regulation in 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_crypto-exchange-hack-2026": {
+            "shares": 331.46,
+            "avg_price": 0.2861,
+            "cost_basis": 94.83,
+            "market_question": "Will a major crypto exchange suffer a hack exceeding $50M in 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_climate-agreement-2026": {
+            "shares": 382.61,
+            "avg_price": 0.2092,
+            "cost_basis": 80.05,
+            "market_question": "Will a major global climate agreement be ratified in 2026?",
+            "outcome": "Yes"
+          }
+        }
+      }
+    },
+    {
+      "cycle_id": 8,
+      "timestamp": "2026-03-28T02:29:27.708664+00:00",
+      "news_event": {
+        "title": "Pharmaceutical company releases positive Phase 3 trial results for breakthrough drug",
+        "description": "Drug candidate shows statistically significant improvement over standard of care, clearing path for FDA regulatory submission.",
+        "source": "Reuters Health",
+        "category": "health",
+        "keywords": [
+          "pharma",
+          "drug",
+          "trial",
+          "fda",
+          "approval",
+          "phase"
+        ]
+      },
+      "analysis": [
+        {
+          "market_slug": "fda-drug-approval-q2",
+          "market_question": "Will the FDA approve a major new drug in Q2 2026?",
+          "direction": "UP",
+          "probability_shift": 0.14,
+          "confidence": 0.9,
+          "reasoning": "News about health directly affects market: 'Will the FDA approve a major new drug in Q2 2026?'"
+        }
+      ],
+      "signals": [
+        {
+          "market_slug": "fda-drug-approval-q2",
+          "market_question": "Will the FDA approve a major new drug in Q2 2026?",
+          "token_id": "tok_yes_fda-drug-approval-q2",
+          "side": "BUY",
+          "outcome": "Yes",
+          "market_price": 0.6,
+          "agent_price": 0.6756,
+          "edge": 0.0756,
+          "edge_pct": "+7.6%",
+          "kelly_fraction": 0.0442,
+          "position_size_usdc": 270.1,
+          "limit_price": 0.6059,
+          "confidence_score": 0.779,
+          "evidence_count": 1,
+          "source_agreement": false,
+          "freshness_weight": 1.0,
+          "spread_cost": 0.0118,
+          "depth_score": 0.713,
+          "reasoning": "News about health directly affects market: 'Will the FDA approve a major new drug in Q2 2026?'",
+          "causal_chain": "Pharmaceutical company releases positive Phase 3 t... \u2192 UP pressure on 'Will the FDA approve a major new drug in Q2 2026?...'",
+          "created_at": "2026-03-28T02:29:27.708819+00:00",
+          "expected_value": 31.07
+        }
+      ],
+      "trades": [
+        {
+          "trade_id": "2c70e4ef",
+          "timestamp": "2026-03-28T02:29:27.708943+00:00",
+          "market_slug": "fda-drug-approval-q2",
+          "market_question": "Will the FDA approve a major new drug in Q2 2026?",
+          "token_id": "tok_yes_fda-drug-approval-q2",
+          "side": "BUY",
+          "outcome": "Yes",
+          "limit_price": 0.6059,
+          "fill_price": 0.6059,
+          "slippage": 0.0,
+          "size_usdc": 270.1,
+          "shares_acquired": 445.78,
+          "edge": 0.0756,
+          "confidence": 0.779,
+          "kelly_fraction": 0.0442,
+          "mode": "paper",
+          "order_id": null,
+          "status": "filled",
+          "current_price": null,
+          "unrealized_pnl": null
+        }
+      ],
+      "portfolio_snapshot": {
+        "initial_bankroll": 10000.0,
+        "cash": 8829.14,
+        "total_value": 10051.33,
+        "total_pnl": 51.33,
+        "total_pnl_pct": 0.51,
+        "num_trades": 8,
+        "num_open_positions": 8,
+        "win_rate": null,
+        "positions": {
+          "tok_yes_fed-rate-cut-next-meeting": {
+            "shares": 312.08,
+            "avg_price": 0.4561,
+            "cost_basis": 142.34,
+            "market_question": "Will the Fed cut interest rates at the next meeting?",
+            "outcome": "Yes"
+          },
+          "tok_yes_ecb-rate-cut-surprise": {
+            "shares": 245.05,
+            "avg_price": 0.3598,
+            "cost_basis": 88.16,
+            "market_question": "Will the ECB cut rates more than expected in 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_gpt5-release-sep": {
+            "shares": 433.25,
+            "avg_price": 0.4135,
+            "cost_basis": 179.14,
+            "market_question": "Will GPT-5 or a comparable AI model be released before September 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_btc-150k-july": {
+            "shares": 259.99,
+            "avg_price": 0.3257,
+            "cost_basis": 84.68,
+            "market_question": "Will Bitcoin exceed $150K by July 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_us-crypto-regulation-2026": {
+            "shares": 416.18,
+            "avg_price": 0.5564,
+            "cost_basis": 231.56,
+            "market_question": "Will the US pass comprehensive crypto regulation in 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_crypto-exchange-hack-2026": {
+            "shares": 331.46,
+            "avg_price": 0.2861,
+            "cost_basis": 94.83,
+            "market_question": "Will a major crypto exchange suffer a hack exceeding $50M in 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_climate-agreement-2026": {
+            "shares": 382.61,
+            "avg_price": 0.2092,
+            "cost_basis": 80.05,
+            "market_question": "Will a major global climate agreement be ratified in 2026?",
+            "outcome": "Yes"
+          },
+          "tok_yes_fda-drug-approval-q2": {
+            "shares": 445.78,
+            "avg_price": 0.6059,
+            "cost_basis": 270.1,
+            "market_question": "Will the FDA approve a major new drug in Q2 2026?",
+            "outcome": "Yes"
+          }
+        }
+      }
+    }
+  ],
+  "summary": {
+    "end_time": "2026-03-28T02:29:27.709351+00:00",
+    "total_cycles": 8,
+    "total_trades": 8,
+    "final_portfolio_value": 10051.33,
+    "total_pnl": 51.33,
+    "total_pnl_pct": 0.51,
+    "portfolio": {
+      "initial_bankroll": 10000.0,
+      "cash": 8829.14,
+      "total_value": 10051.33,
+      "total_pnl": 51.33,
+      "total_pnl_pct": 0.51,
+      "num_trades": 8,
+      "num_open_positions": 8,
+      "win_rate": null,
+      "positions": {
+        "tok_yes_fed-rate-cut-next-meeting": {
+          "shares": 312.08,
+          "avg_price": 0.4561,
+          "cost_basis": 142.34,
+          "market_question": "Will the Fed cut interest rates at the next meeting?",
+          "outcome": "Yes"
+        },
+        "tok_yes_ecb-rate-cut-surprise": {
+          "shares": 245.05,
+          "avg_price": 0.3598,
+          "cost_basis": 88.16,
+          "market_question": "Will the ECB cut rates more than expected in 2026?",
+          "outcome": "Yes"
+        },
+        "tok_yes_gpt5-release-sep": {
+          "shares": 433.25,
+          "avg_price": 0.4135,
+          "cost_basis": 179.14,
+          "market_question": "Will GPT-5 or a comparable AI model be released before September 2026?",
+          "outcome": "Yes"
+        },
+        "tok_yes_btc-150k-july": {
+          "shares": 259.99,
+          "avg_price": 0.3257,
+          "cost_basis": 84.68,
+          "market_question": "Will Bitcoin exceed $150K by July 2026?",
+          "outcome": "Yes"
+        },
+        "tok_yes_us-crypto-regulation-2026": {
+          "shares": 416.18,
+          "avg_price": 0.5564,
+          "cost_basis": 231.56,
+          "market_question": "Will the US pass comprehensive crypto regulation in 2026?",
+          "outcome": "Yes"
+        },
+        "tok_yes_crypto-exchange-hack-2026": {
+          "shares": 331.46,
+          "avg_price": 0.2861,
+          "cost_basis": 94.83,
+          "market_question": "Will a major crypto exchange suffer a hack exceeding $50M in 2026?",
+          "outcome": "Yes"
+        },
+        "tok_yes_climate-agreement-2026": {
+          "shares": 382.61,
+          "avg_price": 0.2092,
+          "cost_basis": 80.05,
+          "market_question": "Will a major global climate agreement be ratified in 2026?",
+          "outcome": "Yes"
+        },
+        "tok_yes_fda-drug-approval-q2": {
+          "shares": 445.78,
+          "avg_price": 0.6059,
+          "cost_basis": 270.1,
+          "market_question": "Will the FDA approve a major new drug in Q2 2026?",
+          "outcome": "Yes"
+        }
+      }
+    }
+  }
+}
