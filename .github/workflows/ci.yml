@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Verify all modules import cleanly
+        run: |
+          python -c "from src.config import AgentConfig; print('config ok')"
+          python -c "from src.ingestion.news import NewsIngestionEngine; print('news ok')"
+          python -c "from src.ingestion.markets import MarketDataClient; print('markets ok')"
+          python -c "from src.analysis.engine import AnalysisEngine; print('analysis ok')"
+          python -c "from src.scoring.confidence import ConfidenceScorer; print('scoring ok')"
+          python -c "from src.execution.executor import ExecutionEngine; print('executor ok')"
+
+      - name: Run backtest simulation
+        run: python -m src.backtest
