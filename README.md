@@ -398,6 +398,8 @@ PolymarketPBC/
 
 ## Current Status & Roadmap
 
+This repo is a hackathon prototype and demo artifact. The core decision engine, scoring logic, and paper execution are fully implemented; live capital deployment, production hardening, and comprehensive testing are next steps.
+
 ### ✅ What's Built & Working
 - **News ingestion pipeline** — Concurrent multi-source RSS with deduplication and latency tracking
 - **Polymarket market data client** — Fetches active markets via Gamma API and live orderbooks via CLOB API
@@ -406,6 +408,13 @@ PolymarketPBC/
 - **Paper trading execution** — Realistic fill simulation by walking the orderbook with slippage modeling and risk management (5 trades rejected in backtest due to slippage tolerance)
 - **Agent orchestration loop** — Ties all modules together in a continuous autonomous cycle
 - **Backtest simulation** — End-to-end demo with 8 news cycles, 8 executed trades, and 5 risk-rejected trades
+
+### ⚠️ Limitations
+- **No live execution yet** — The agent runs in paper trading mode only; `py-clob-client` SDK integration is architected but not wired
+- **No historical evaluation** — Backtest uses simulated news events against real market structure, not a large real-world news dataset
+- **No test suite or CI** — Code has been manually tested but lacks automated regression tests
+- **Latency claims are architectural** — Ingestion latency targets are design goals based on prototype measurements, not benchmarked on production infrastructure
+- **LLM analysis is probabilistic** — The "superforecaster" framing describes structured constrained-output prompting, not a calibrated forecasting system
 
 ### 🔜 Roadmap (Post-Hackathon)
 - **Live execution** — Wire `py-clob-client` SDK into the execution engine for real Polymarket trades
