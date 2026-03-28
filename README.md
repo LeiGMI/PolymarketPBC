@@ -23,7 +23,7 @@ Built for the [Penn Blockchain Conference 2026 Hackathon](https://www.pennblockc
 
 ## Overview
 
-**Sentinel** is a fully autonomous trading agent designed for Polymarket. It operates in a continuous loop:
+**Sentinel** is an autonomous trading agent prototype designed for Polymarket. It operates in a continuous loop:
 
 ```
 ┌──────────────┐     ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
@@ -401,18 +401,18 @@ PolymarketPBC/
 ### ✅ What's Built & Working
 - **News ingestion pipeline** — Concurrent multi-source RSS with deduplication and latency tracking
 - **Polymarket market data client** — Fetches active markets via Gamma API and live orderbooks via CLOB API
-- **AI analysis engine** — Structured LLM prompting with Claude/OpenAI support; includes deterministic mock mode for demos without API keys
+- **AI analysis engine** — Structured LLM prompting with auto-detection of Claude or OpenAI via environment variables (`ANTHROPIC_API_KEY` / `OPENAI_API_KEY`); includes deterministic mock mode for demos without API keys
 - **Bayesian confidence scoring** — Full mathematical pipeline: evidence weighting, time decay, multi-source aggregation, Kelly criterion sizing, orderbook adjustment
-- **Paper trading execution** — Realistic fill simulation by walking the orderbook with slippage modeling
+- **Paper trading execution** — Realistic fill simulation by walking the orderbook with slippage modeling and risk management (5 trades rejected in backtest due to slippage tolerance)
 - **Agent orchestration loop** — Ties all modules together in a continuous autonomous cycle
 - **Backtest simulation** — End-to-end demo with 8 news cycles, 8 executed trades, and 5 risk-rejected trades
 
 ### 🔜 Roadmap (Post-Hackathon)
 - **Live execution** — Wire `py-clob-client` SDK into the execution engine for real Polymarket trades
 - **WebSocket streaming** — Replace RSS polling with Polymarket WebSocket for sub-second market data
-- **LLM provider config** — Expose provider/model/API URL via environment variables for easy switching
 - **Historical backtesting** — Replay against archived news + historical Polymarket price data
 - **Dashboard UI** — Web-based monitoring dashboard for live agent status
+- **CI & testing** — Automated test suite and GitHub Actions workflow
 
 ---
 
